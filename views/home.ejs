@@ -1,12 +1,13 @@
 <% include ./partials/header %>
 <div class="container">
   <a href = "/create">  <button type="button" class="btn btn-success">Create</button></a>
+</br>
   <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Author</th>
         <th scope="col">Book Name</th>
+        <th scope="col">Author</th>
         <th scope="col">Handle</th>
         <th scope="col"> </th>
         <th scope="col"> </th>
@@ -14,18 +15,16 @@
 
       </tr>
     </thead>
-
-
     <tbody>
     <% books.forEach(function(book){ %>
       <tr>
         <th scope="row"><%=book.id%></th>
         <td><%=book.name%></td>
         <td><%=book.author%></td>
-        <td>@<%=book.handle%></td>
-        <td><button type="button" class="btn btn-primary">Edit</button>
+        <td><%=book.handle%></td>
+        <td><a href = "/edit/name/<%=book.name%>/author/<%=book.author%>/handle/<%=book.handle%>/id/<%=book.id%>"><button type="button" class="btn btn-primary">Edit</button></a>
         </td>
-        <td><button type="button" class="btn btn-danger">Delete</button>
+        <td><a href = "/delete/id/<%=book.id%>"> <button type="button" class="btn btn-danger">Delete</button></a>
         </td>
       </tr>
       <% }) %>
