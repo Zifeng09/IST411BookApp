@@ -1,3 +1,38 @@
 <% include ./partials/header %>
-<h1>Authentication Passed. Welcome to the main page, testuser@email.com<h1>
+<div class="container">
+  <a href = "/create">  <button type="button" class="btn btn-success">Create</button></a>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Author</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Handle</th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+
+
+      </tr>
+    </thead>
+
+
+    <tbody>
+    <% books.forEach(function(book){ %>
+      <tr>
+        <th scope="row"><%=book.id%></th>
+        <td><%=book.name%></td>
+        <td><%=book.author%></td>
+        <td>@<%=book.handle%></td>
+        <td><button type="button" class="btn btn-primary">Edit</button>
+        </td>
+        <td><button type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+      <% }) %>
+     
+    </tbody>
+
+
+  </table>
+</container>
 <% include ./partials/footer %>

@@ -9,6 +9,9 @@
         "start": "node index.js"
     },
     "dependencies": {
+        "@azure/cosmos": "^2.0.5",
+        "async": "^2.6.1",
+        "azure-storage": "^2.10.2",
         "body-parser": "^1.18.3",
         "ejs": "^2.6.1",
         "express": "^4.16.4"
