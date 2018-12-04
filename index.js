@@ -1,13 +1,44 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const multer = require('multer');
+const path = require('path');
+
 var app = express();
 var port = process.env.PORT || 3000;
-
-// tableService.createTableService('users',function()
-
+app.use(express.static('public'));
 
 
 const fs = require('fs');
+const storage = multer.diskStorage({
+    destination: './public/images/',
+    filename: function(req, file, cb){
+      cb(null,req.body.id + path.extname(file.originalname));
+    }
+  });
+
+
+  var upload = multer({
+    storage: storage,
+    limits:{fileSize: 1000000},
+    fileFilter: function(req, file, cb){
+      checkFileType(file, cb);
+    }
+  }).single('myImage');
+
+  function checkFileType(file, cb){
+    // Allowed ext
+    var filetypes = /jpeg|jpg|png|gif/;
+    // Check ext
+    var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    var mimetype = filetypes.test(file.mimetype);
+  
+    if(mimetype && extname){
+      return cb(null,true);
+    } else {
+      cb('Error: Images Only!');
+    }
+  }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -63,18 +94,60 @@ app.get("/edit/name/:name/author/:author/handle/:handle/id/:id", function(req,re
     res.render("edit.ejs", {data:data});
 })
 //Create book
-app.post("/create/book",function(req,res){
+app.post("/createbook",function(req,res){
+    //  books =  fetchNotes();
+    // var data = {
+    //     name: req.body.name,
+    //     author: req.body.author,
+    //     handle: req.body.handle,
+    //     id: req.body.id
+    // }
+    // var newBook = data;
+    // books.push(newBook);
+    // saveNotes(books);
+    // res.render("home.ejs", {data:data, books: books})
      books =  fetchNotes();
-    var data = {
+        var data = {
         name: req.body.name,
         author: req.body.author,
         handle: req.body.handle,
         id: req.body.id
     }
-    var newBook = data;
-    books.push(newBook);
-    saveNotes(books);
-    res.render("home.ejs", {data:data, books: books})
+        var newBook = data;
+        console.log(newBook);
+        books.push(newBook);
+        saveNotes(books);
+        console.log(books);
+        res.render('home.ejs',{books:books, data:data});
+    //     upload(req, res, function (err) {
+    //         if(err){
+    //             console.log("error"+req.file)
+
+    //       res.render('home.ejs', {
+    //         msg: err,
+    //         data:data, books: books
+    //       });
+    //     } else {
+    //         console.log(req.file)
+    //       if(req.file == undefined){
+    //         res.render('home.ejs', {
+    //           msg: 'Error: No File Selected!',
+    //           data:data, books: books
+              
+
+    //         });
+    //       } else {
+    //         console.log(req.file)
+
+    //         res.render('home.ejs', {
+    //           msg: 'File Uploaded!',
+    //           file: `uploads/${req.file.filename}`,
+    //           data:data, books: books
+
+    //         });
+    //       }
+    //     }
+    //   });
 })
 
 //delete
@@ -94,10 +167,10 @@ app.get("/delete/id/:id", function(req,res){
 app.post("/edit/book",function(req,res){
    books =  fetchNotes();
     var data = {
-        name: req.body.name,
-        author: req.body.author,
-        handle: req.body.handle,
-        id: req.body.id
+        name: req.text.name,
+        author: req.text.author,
+        handle: req.text.handle,
+        id: req.text.id
     }
 
     for(var i=0; i<books.length;i++){

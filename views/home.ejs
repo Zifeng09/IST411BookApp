@@ -1,37 +1,58 @@
 <% include ./partials/header %>
-<div class="container">
-  <a href = "/create">  <button type="button" class="btn btn-success">Create</button></a>
-</br>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Book Name</th>
-        <th scope="col">Author</th>
-        <th scope="col">Handle</th>
-        <th scope="col"> </th>
-        <th scope="col"> </th>
+
+<div class="container"> 
+ 
+<table class="ui celled padded table">
+  <thead>
+    <tr><th class="single line">Cover Image</th>
+    <th>Book Name</th>
+    <th>Author</th>
+    <th>Keywords</th>
+    <th>ID</th>
+    <th>Edit</th>
+    <th>Delete</th>
 
 
-      </tr>
-    </thead>
-    <tbody>
+  </tr></thead>
+  <tbody>
     <% books.forEach(function(book){ %>
-      <tr>
-        <th scope="row"><%=book.id%></th>
-        <td><%=book.name%></td>
-        <td><%=book.author%></td>
-        <td><%=book.handle%></td>
-        <td><a href = "/edit/name/<%=book.name%>/author/<%=book.author%>/handle/<%=book.handle%>/id/<%=book.id%>"><button type="button" class="btn btn-primary">Edit</button></a>
-        </td>
-        <td><a href = "/delete/id/<%=book.id%>"> <button type="button" class="btn btn-danger">Delete</button></a>
-        </td>
-      </tr>
-      <% }) %>
-     
-    </tbody>
 
+    <tr>
+      <td>
+          <img src="/images/199.jpg" class="ui small rounded image">
+      </td>
+      <td class="single line">
+          <%=book.name%>
+      </td>
+      <td class="single line">
+          <%=book.author%>
+      </td>
+      <td class="single line">
+          <%=book.handle%>
+      </td>
+      <td class="single line">
+          <%=book.id%>
+      </td>
+      <td class = "single line"><a href = "/edit/name/<%=book.name%>/author/<%=book.author%>/handle/<%=book.handle%>/id/<%=book.id%>"><button type="button" class="ui button green">Edit</button></a>
+      </td>
+      <td class = "single line"><a href = "/delete/id/<%=book.id%>"> <button type="button" class="ui button red">Delete</button></a>
+      </td>
+    </tr>
+    
+    <% }) %>
 
-  </table>
-</container>
+  </tbody>
+  <tfoot class="full-width">
+    <tr>
+      <th></th>
+      <th colspan="7">
+          <div class="ui right floated">
+          <a href = "/create"> <button type="button" class="ui button blue right floated">Add Book</button></a>
+          </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+</div>
+
 <% include ./partials/footer %>
