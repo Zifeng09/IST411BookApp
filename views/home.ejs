@@ -9,6 +9,7 @@
     <th>Author</th>
     <th>Keywords</th>
     <th>ID</th>
+    <th>Upload</th>
     <th>Edit</th>
     <th>Delete</th>
 
@@ -19,7 +20,7 @@
 
     <tr>
       <td>
-          <img src="/images/199.jpg" class="ui small rounded image">
+          <img src="/images/<%=book.id%>.jpg" class="ui small rounded image">
       </td>
       <td class="single line">
           <%=book.name%>
@@ -32,6 +33,8 @@
       </td>
       <td class="single line">
           <%=book.id%>
+      </td>
+      <td class = "single line"><a href = "/upload/book/<%=book.id%>/"><button type="button" class="ui button orange">Upload Image</button></a>
       </td>
       <td class = "single line"><a href = "/edit/name/<%=book.name%>/author/<%=book.author%>/handle/<%=book.handle%>/id/<%=book.id%>"><button type="button" class="ui button green">Edit</button></a>
       </td>

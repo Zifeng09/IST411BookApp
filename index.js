@@ -93,6 +93,8 @@ app.get("/edit/name/:name/author/:author/handle/:handle/id/:id", function(req,re
     }
     res.render("edit.ejs", {data:data});
 })
+
+
 //Create book
 app.post("/createbook",function(req,res){
     //  books =  fetchNotes();
@@ -161,6 +163,58 @@ app.get("/delete/id/:id", function(req,res){
     saveNotes(books);
     res.render("home.ejs",{books:books});
 
+})
+app.get("/upload/book/:id", function(req,res){
+    books =  fetchNotes();
+    var data = {
+        id: req.params.id
+    }
+    res.render("upload.ejs", {data:data});
+})
+
+
+
+//Upload Picture
+app.post("/upload/image", function(req,res){
+    books =  fetchNotes();
+
+    var data = {
+        id: req.body.id
+    }
+    books = fetchNotes();
+
+    
+            upload(req, res, function (err) {
+                
+            if(err){
+                console.log("error"+req.file)
+
+          res.render('home.ejs', {
+            msg: err,
+            data:data, books:books
+          });
+        } else {
+            console.log(req.file)
+          if(req.file == undefined){
+            res.render('home.ejs', {
+              msg: 'Error: No File Selected!',
+              data:data, books:books
+              
+
+            });
+          } else {
+            console.log(req.file)
+
+            res.render('home.ejs', {
+              msg: 'File Uploaded!',
+              file: `uploads/${req.file.filename}`,
+              data:data, books: books
+
+            });
+          }
+        }
+      });
+      
 })
 
 //Edit boook
