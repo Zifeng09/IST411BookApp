@@ -185,7 +185,7 @@ app.post("/upload/image", function(req,res){
 
     
             upload(req, res, function (err) {
-                
+
             if(err){
                 console.log("error"+req.file)
 
@@ -221,10 +221,10 @@ app.post("/upload/image", function(req,res){
 app.post("/edit/book",function(req,res){
    books =  fetchNotes();
     var data = {
-        name: req.text.name,
-        author: req.text.author,
-        handle: req.text.handle,
-        id: req.text.id
+        name: req.body.name,
+        author: req.body.author,
+        handle: req.body.handle,
+        id: req.body.id
     }
 
     for(var i=0; i<books.length;i++){
